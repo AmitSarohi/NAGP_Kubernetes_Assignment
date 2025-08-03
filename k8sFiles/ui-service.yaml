@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nagp-ui-clusterip-service
+spec:
+  type: ClusterIP
+  selector:
+    app: inventory-app
+    type: ui-end
+  ports:
+    - port: 80
+      targetPort: 80
+  

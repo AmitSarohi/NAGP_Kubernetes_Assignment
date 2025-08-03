@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nagp-postgres-pvc
+spec:
+  storageClassName: standard # GKE's default StorageClass for Persistent Disks
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nagp-ui-deployment
+  labels:
+    app: inventory-app
+    type: ui-end
+spec:
+  template:
+    metadata:
+      name: nagp-ui-pod
+      labels:
+        app: inventory-app
+        type: ui-end
+    spec:
+      containers:
+        - name: nagp-ui-container
+          image: amitsarohi/nagp-sarohi-inventory-ui:latest # <-- updated image
+          ports:
+            - containerPort: 80
+  replicas: 2
+  selector:
+    matchLabels:
+      type: ui-end
+      app: inventory-app

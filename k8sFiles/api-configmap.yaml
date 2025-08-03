@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nagp-api-config
+data:
+  DB_HOST: nagp-postgres-clusterip-service
+  DB_NAME: mydatabase
+  DB_USER: myuser
+  ALLOWED_ORIGINS: "http://localhost:3000,http://ui.nagp.com,http://ui.yourdomain.com"

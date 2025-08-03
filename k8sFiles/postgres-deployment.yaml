@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nagp-postgres-deployment
+  labels:
+    app: inventory-app
+    type: db-end
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: db-end
+      app: inventory-app
+  template:
+    metadata:
+      name: dbpostgres-pod
+      labels:
+        app: inventory-app
+        type: db-end
+    spec:
+      containers:
+        - name: nagp-postgres-container
+          image: postgres:16
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: nagp-postgres-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: nagp-postgres-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nagp-postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata  # use a subdirectory
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data       # keep mount here
+            - name: initdb
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: nagp-postgres-pvc
+        - name: initdb
+          configMap:
+            name: nagp-postgres-init-sql

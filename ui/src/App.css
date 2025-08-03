@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+}
+
+.app-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  color: #333;
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fdfdfd;
+  border: 1px solid #e0e0e0;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.actions .btn {
+  margin-left: 10px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn.add {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.btn.update {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.btn.edit {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn.delete {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}

@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nagp-api-deployment
+  labels:
+    app: inventory-app
+    type: api-end
+spec:
+  template:
+    metadata:
+      name: nagp-api-pod
+      labels:
+        app: inventory-app
+        type: api-end
+    spec:
+      containers:
+        - name: nagp-api-container
+          image: amitsarohi/nagp-sarohi-inventory-api:latest  # <-- updated image
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: nagp-api-config
+                  key: DB_HOST
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: nagp-api-config
+                  key: DB_NAME
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: nagp-api-config
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nagp-api-secret
+                  key: DB_PASSWORD
+            - name: ALLOWED_ORIGINS
+              valueFrom:
+                configMapKeyRef:
+                  name: nagp-api-config
+                  key: ALLOWED_ORIGINS
+  replicas: 4
+  selector:
+    matchLabels:
+      type: api-end
+      app: inventory-app

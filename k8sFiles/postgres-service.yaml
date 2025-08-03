@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nagp-postgres-clusterip-service
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  selector:
+    app: inventory-app
+    type: db-end

@@ -11,8 +11,5 @@ This repo includes:
 
 ## Setup
 
-### Local (Docker Compose)
-
-```bash
-docker-compose up --build
+## Local (Docker Compose)
 
